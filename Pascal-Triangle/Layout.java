@@ -31,6 +31,15 @@ public class Layout {
         return triangle;
     }
 
+    public void displayTriangle() {
+        for (int r = 0; r < totalRows; r++) {
+            for (int c = 0; c < r + 1; c++) {
+                System.out.print(triangle[r][c] + " ");
+            }
+            System.out.println();
+        }
+    }
+
     public void updateRow(int r) {
         totalRows = r;
     }
