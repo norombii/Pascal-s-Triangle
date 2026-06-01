@@ -40,7 +40,7 @@ public class Layout {
         }
     }
 
-    public void updateRow(int r) {
+    public void setRow(int r) {
         totalRows = r;
     }
 
