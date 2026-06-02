@@ -35,12 +35,12 @@ public class PTriangle {
         if (choice.equals("P")) {
             System.out.println("How many rows (1-15) would you like  to display?");
             int numRow = Integer.parseInt(scanner.nextLine());
-            triangle.setRow(numRow);
 
             if (numRow < 1 || numRow > 15) {
                 System.out.println("Please enter a number between 1 and 15.");
             }
-
+            
+            triangle.setRow(numRow);
             triangle.triangleShape();
             triangle.fillTriangle();
             triangle.displayTriangle();

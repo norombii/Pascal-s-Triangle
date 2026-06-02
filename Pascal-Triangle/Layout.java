@@ -4,8 +4,6 @@ import java.util.Arrays;
 public class Layout {
 
     public int totalRows;
-    public int col;
-
     private int[][] triangle = new int[totalRows][]; 
 
 
@@ -43,14 +41,6 @@ public class Layout {
     public void setRow(int r) {
         totalRows = r;
     }
-
-
-    public int[][] layers(int n) {
-
-        return triangle;
-    }
-
-}
 
 
     
