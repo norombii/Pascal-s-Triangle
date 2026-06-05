@@ -13,12 +13,6 @@ public class Layout {
         fillTriangle();
     }
 
-    public int[][] triangleShape() {
-        for (int r = 0; r < totalRows-1; r++) {
-            triangle[r] = new int [r+1];
-        }
-        return triangle;
-    }
 
      public int[][] fillTriangle() {
 
@@ -36,12 +30,6 @@ public class Layout {
     }
 
     public void displayTriangle() {
-        for (int r = 0; r < totalRows; r++) {
-            for (int c = 0; c < r + 1; c++) {
-                System.out.print(triangle[r][c] + " ");
-            }
-            System.out.println();
-        }
 
         for (int r = 0; r < triangle.length; r++) {
             for (int i = 0; i < totalRows - r; i++) {
