@@ -1,17 +1,18 @@
-import java.util.ArrayList;
-
 public class Layout {
 
     public int totalRows;
     private int[][] triangle = new int[totalRows][]; 
 
-
     public Layout() {
         fillTriangle();
     }
 
+    public void setRow(int r) {
+        this.totalRows = r;
+    }
+
     public int[][] triangleShape() {
-        for (int r = 0; r < totalRows; r++) {
+        for (int r = 0; r < totalRows-1; r++) {
             triangle[r] = new int [r+1];
         }
         return triangle;
@@ -22,8 +23,8 @@ public class Layout {
             int currVal = 1;
             for (int c = 0; c < r + 1; c++) {
                 triangle [r][c] = currVal;
+                currVal = (currVal * (r-c)/(c+1));
             }
-            currVal = (currVal * (r-c)/(c+1));
         }
         return triangle;
     }
@@ -37,9 +38,11 @@ public class Layout {
         }
     }
 
-    public void setRow(int r) {
-        totalRows = r;
+    public int getValue(int r, int c) {
+        return triangle[r][c];
     }
+
+}
 
 
     
