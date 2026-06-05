@@ -7,8 +7,10 @@ public class Layout {
         fillTriangle();
     }
 
-    public void setRow(int r) {
+    public void setRows(int r) {
         this.totalRows = r;
+        this.triangle = new int[totalRows][];
+        fillTriangle();
     }
 
     public int[][] triangleShape() {
@@ -19,11 +21,15 @@ public class Layout {
     }
 
      public int[][] fillTriangle() {
+
         for (int r = 0; r < totalRows; r++) {
-            int currVal = 1;
-            for (int c = 0; c < r + 1; c++) {
-                triangle [r][c] = currVal;
-                currVal = (currVal * (r-c)/(c+1));
+            triangle[r] = new int[r + 1];
+
+            triangle[r][0] = 1;
+            triangle[r][r] = 1;
+
+            for (int c = 1; c < r; c++) {
+                triangle[r][c] = triangle[r - 1][c - 1] + triangle[r - 1][c];
             }
         }
         return triangle;
@@ -32,6 +38,16 @@ public class Layout {
     public void displayTriangle() {
         for (int r = 0; r < totalRows; r++) {
             for (int c = 0; c < r + 1; c++) {
+                System.out.print(triangle[r][c] + " ");
+            }
+            System.out.println();
+        }
+
+        for (int r = 0; r < triangle.length; r++) {
+            for (int i = 0; i < totalRows - r; i++) {
+                System.out.print(" ");
+            }
+            for (int c = 0; c < triangle[r].length; c++) {
                 System.out.print(triangle[r][c] + " ");
             }
             System.out.println();

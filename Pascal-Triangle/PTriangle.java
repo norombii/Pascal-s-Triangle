@@ -38,9 +38,9 @@ public class PTriangle {
             if (numRow < 1 || numRow > 15) {
                 System.out.println("Please enter a number between 1 and 15.");
             }
-            
+
+            //triangle.fillTriangle();
             triangle.triangleShape();
-            triangle.fillTriangle();
             triangle.displayTriangle();
         }
 
