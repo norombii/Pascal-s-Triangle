@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class PTriangle {
 
     Scanner scanner = new Scanner(System.in);
