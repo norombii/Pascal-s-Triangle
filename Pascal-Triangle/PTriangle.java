@@ -47,8 +47,13 @@ public class PTriangle {
             int row = Integer.parseInt(scanner.nextLine());
             System.out.print("col: ");
             int col = Integer.parseInt(scanner.nextLine());
-            triangle.setRows(row);
-            System.out.println("Value at (" + row + ", " + col + "): " + triangle.getValue(row-1, col));
+            if (col > row + 1) {
+                System.out.println("The col is too big! Please enter a col between 1-" + (row+1));
+                System.out.print("col: ");
+                col = Integer.parseInt(scanner.nextLine());
+            }
+            triangle.setRows(row+1);
+            System.out.println("Value at (" + row + ", " + col + "): " + triangle.getValue(row, col-1));
         }
 
         else if (choice.equals("c")) {
@@ -57,6 +62,20 @@ public class PTriangle {
             int n = Integer.parseInt(scanner.nextLine());
             System.out.print("r: ");
             int r = Integer.parseInt(scanner.nextLine());
+
+            if (n < 0 || r < 0) {
+                System.out.println("Error: Inputs cannot be negative.");
+            } 
+            else if (r > n) {
+                 System.out.println("Error: r cannot be greater than n.");
+            } 
+            else if (n > 61) { 
+    // 61 is the absolute maximum n before nCr can easily overflow a 64-bit long
+                System.out.println("Error: n is too large! Please enter an n of 61 or less to prevent data overflow.");
+            } 
+            else {
+                System.out.println("nCr: " + nChooseR(n, r));
+            }
             nChooseR(n, r);
             System.out.println("nCr: " + nChooseR(n, r));
         }
