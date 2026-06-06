@@ -39,10 +39,10 @@ public class PTriangle {
 
     public void runLayout() {
 
-        System.out.println("Pascal's Triangle (p), specific value (v), or combination (c):");
+        System.out.println("Pascal's Triangle (t), specific value (v), or combination (c):");
         String choice = scanner.nextLine();
 
-        if (choice.equals("p")) {
+        if (choice.equals("t")) {
             System.out.println("How many rows (1-10) would you like  to display?");
             int numRow = Integer.parseInt(scanner.nextLine());
              triangle.setRows(numRow);
