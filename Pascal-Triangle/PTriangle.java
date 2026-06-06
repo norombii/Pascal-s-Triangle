@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.util.Scanner;
 
 public class PTriangle {
@@ -9,20 +10,31 @@ public class PTriangle {
         play();
     }
 
-    public int nChooseR(int n , int r) {
+    public static void clearScreen() {
+        // Hacky gross unicode hack to clear console - Teacher
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+        System.out.println();
+        System.out.println();
+    }
+
+    public BigInteger nChooseR(int n , int r) {
         if (r == 0 || r == n) {
-            return 1;
+            return BigInteger.ONE;
         }
-        
-        int numerator = 1;
+        // changed this code to include BigInteger for overflow errors
+        // found on internet
+        BigInteger numerator = BigInteger.ONE;
         for (int i = n; i > n - r; i--) {
-            numerator *= i;
+            numerator = numerator.multiply(BigInteger.valueOf(i));
         }
-        int denominator = 1;
+
+        BigInteger denominator = BigInteger.ONE;
         for (int i = r; i > 0; i--) {
-            denominator *= i;
+            denominator = denominator.multiply(BigInteger.valueOf(i));
         }
-        return numerator / denominator;
+
+        return numerator.divide(denominator);
     }
 
     public void runLayout() {
@@ -39,45 +51,51 @@ public class PTriangle {
                 System.out.println("Please enter a number between 1 and 10.");
             }
             triangle.displayTriangle();
+
         }
 
         else if (choice.equals("v")) {
-            System.out.println("Enter the row and column to find the value (starts at row 0).");
+            System.out.println("Enter the row and column to find the value (0-33).");
             System.out.print("row: ");
             int row = Integer.parseInt(scanner.nextLine());
             System.out.print("col: ");
             int col = Integer.parseInt(scanner.nextLine());
-            if (col > row + 1) {
-                System.out.println("The col is too big! Please enter a col between 1-" + (row+1));
-                System.out.print("col: ");
-                col = Integer.parseInt(scanner.nextLine());
+
+            // prevent overflow
+            // found on internet
+            if (row > 33) { 
+                System.out.println("row limit is 33!");
+            }     
+            else if (col < 1 || col > row + 1) {
+                System.out.println("Please enter a col between 1-" + (row+1));
             }
-            triangle.setRows(row+1);
-            System.out.println("Value at (" + row + ", " + col + "): " + triangle.getValue(row, col-1));
+            else {
+                triangle.setRows(row+1);
+                BigInteger val = nChooseR(row, col - 1); 
+                System.out.println("Value at (" + row + ", " + col + "): " + val);
+            }
         }
 
         else if (choice.equals("c")) {
-            System.out.println("Enter n and r for nCr:");
+            System.out.println("Enter n (1-61) and r for nCr:");
             System.out.print("n: ");
             int n = Integer.parseInt(scanner.nextLine());
             System.out.print("r: ");
             int r = Integer.parseInt(scanner.nextLine());
 
             if (n < 0 || r < 0) {
-                System.out.println("Error: Inputs cannot be negative.");
+                System.out.println("Inputs have to be positive!");
             } 
             else if (r > n) {
-                 System.out.println("Error: r cannot be greater than n.");
+                 System.out.println("r have to be less than n!");
             } 
             else if (n > 61) { 
-    // 61 is the absolute maximum n before nCr can easily overflow a 64-bit long
-                System.out.println("Error: n is too large! Please enter an n of 61 or less to prevent data overflow.");
+                System.out.println("n is too large! Please enter a n less than 62!");
             } 
             else {
+                nChooseR(n, r);
                 System.out.println("nCr: " + nChooseR(n, r));
             }
-            nChooseR(n, r);
-            System.out.println("nCr: " + nChooseR(n, r));
         }
 
         else {
@@ -92,6 +110,7 @@ public class PTriangle {
             runLayout();
             System.out.println("Would you like to run the program again? (y/n)");
             ans = scanner.nextLine();
+            clearScreen();
 
         }
         System.out.println("Come again next time!");
